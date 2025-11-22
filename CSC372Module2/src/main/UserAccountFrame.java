@@ -176,6 +176,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         			double amount = Double.parseDouble(withdrawField.getText());
         			if (amount > userBalance) {
         				JOptionPane.showMessageDialog(this, "Insufficient funds.", "Error", JOptionPane.ERROR_MESSAGE);
+        				withdrawField.setValue(null);
+        				withdrawField.setText("");
         			} else {
         				userBalance -= amount;
         				confirmBalanceLabel.setText(String.format("Withdrawal Successful. New Balance: $%.2f", userBalance));

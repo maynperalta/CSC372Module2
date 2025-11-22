@@ -29,7 +29,6 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         balanceField = new JFormattedTextField(NumberFormat.getNumberInstance());
         balanceField.setEditable(true);
         balanceField.setText("");
-        
         balanceBtn = new JButton("Submit Balance");
         balanceBtn.addActionListener(this);
         	
@@ -38,6 +37,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         	
         positionConst.gridx = 2;
         positionConst.gridy = 0;
+        positionConst.fill = GridBagConstraints.NONE;
+        positionConst.weightx = 0;
         positionConst.insets = new Insets (10, 10, 10, 10);
         add(userBalanceLabel, positionConst);
         
@@ -49,6 +50,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         positionConst.gridx = 2;
         positionConst.gridy = 2;
+        positionConst.fill = GridBagConstraints.NONE;
+        positionConst.weightx = 0;
         add(balanceBtn, positionConst);
         
         confirmBalancePanel = new JPanel();
@@ -57,6 +60,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         positionConst.gridx = 2;
         positionConst.gridy = 3;
+        positionConst.fill = GridBagConstraints.NONE;
+        positionConst.weightx = 0;
         add(confirmBalancePanel, positionConst);
         
         userDepositLabel = new JLabel("Deposit Amount: ");
@@ -68,6 +73,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         positionConst.gridx = 1;
         positionConst.gridy = 4;
+        positionConst.fill = GridBagConstraints.NONE;
+        positionConst.weightx = 0;
         add(userDepositLabel, positionConst);
         
         positionConst.gridx = 2;
@@ -78,6 +85,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         positionConst.gridx = 3;
         positionConst.gridy = 4;
+        positionConst.fill = GridBagConstraints.NONE;
+        positionConst.weightx = 0;
         add(depositBtn, positionConst);
         
         userWithdrawLabel = new JLabel("Withdraw Amount: ");
@@ -89,6 +98,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         positionConst.gridx = 1;
         positionConst.gridy = 5;
+        positionConst.fill = GridBagConstraints.NONE;
+        positionConst.weightx = 0;
         add(userWithdrawLabel, positionConst);
         
         positionConst.gridx = 2;
@@ -99,19 +110,28 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         positionConst.gridx = 3;
         positionConst.gridy = 5;
+        positionConst.fill = GridBagConstraints.NONE;
+        positionConst.weightx = 0;
         add(withdrawBtn, positionConst);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(500, 400);
+		setSize(600, 400);
 		setVisible(true);
-        }
-        
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				JOptionPane.showMessageDialog(null,  String.format("Goodbye. Your balance is: $%.2f", userBalance));
+			}
+		});
+        }        
         @Override
         public void actionPerformed(ActionEvent e) {
         	try {
         		if (e.getSource() == balanceBtn) {
         			userBalance = Double.parseDouble(balanceField.getText());
-        			confirmBalanceLabel.setText("Welcome. Your balance is: $" + userBalance);
+        			confirmBalanceLabel.setText(String.format("Welcome. Your balance is: $%.2f", userBalance));
+        			balanceField.setText("");
         		} else if (e.getSource() == depositBtn) {
         			double amount = Double.parseDouble(depositField.getText());
         			userBalance += amount;
@@ -123,7 +143,7 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         				JOptionPane.showMessageDialog(this, "Insufficient funds.", "Error", JOptionPane.ERROR_MESSAGE);
         			} else {
         				userBalance -= amount;
-        				confirmBalanceLabel.setText("Withdrawal Successful. New Balance: $" + userBalance);
+        				confirmBalanceLabel.setText(String.format("Withdrawal Successful. New Balance: $%.2f", userBalance));
         				withdrawField.setText("");
         			}
         		} 

@@ -114,8 +114,15 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         positionConst.weightx = 0;
         add(withdrawBtn, positionConst);
         
+        userDepositLabel.setVisible(false);
+        depositField.setVisible(false);
+        depositBtn.setVisible(false);
+        userWithdrawLabel.setVisible(false);
+        withdrawField.setVisible(false);
+        withdrawBtn.setVisible(false);
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(600, 400);
+		pack();
 		setVisible(true);
 		
 		addWindowListener(new WindowAdapter() {
@@ -132,6 +139,18 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         			userBalance = Double.parseDouble(balanceField.getText());
         			confirmBalanceLabel.setText(String.format("Welcome. Your balance is: $%.2f", userBalance));
         			balanceField.setText("");
+        			
+        			userDepositLabel.setVisible(true);
+        	        depositField.setVisible(true);
+        	        depositBtn.setVisible(true);
+        	        userWithdrawLabel.setVisible(true);
+        	        withdrawField.setVisible(true);
+        	        withdrawBtn.setVisible(true);
+        	        
+        	        this.revalidate();
+        	        this.repaint();
+        	        pack();
+        	        
         		} else if (e.getSource() == depositBtn) {
         			double amount = Double.parseDouble(depositField.getText());
         			userBalance += amount;

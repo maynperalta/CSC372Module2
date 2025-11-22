@@ -36,6 +36,18 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         positionConst.gridy = 0;
         positionConst.insets = new Insets (10, 10, 10, 10);
         add(userBalanceLabel, positionConst);
+        
+        positionConst.gridx = 2;
+        positionConst.gridy = 1;
+        add(balanceField, positionConst);
+        
+        positionConst.gridx = 2;
+        positionConst.gridy = 2;
+        add(balanceBtn, positionConst);
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(500, 400);
+		setVisible(true);
         }
         
         @Override
@@ -49,6 +61,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         	
         }
 	public static void main(String[] args) {
+		new UserAccountFrame();
+		
 	
 	
 	}

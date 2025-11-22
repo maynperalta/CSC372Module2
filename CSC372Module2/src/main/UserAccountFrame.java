@@ -56,7 +56,39 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         positionConst.gridy = 3;
         add(confirmBalancePanel, positionConst);
         
+        userDepositLabel = new JLabel("Deposit Amount: ");
+        depositField = new JTextField(10);
+        depositBtn = new JButton("Deposit");
+        depositBtn.addActionListener(this);
         
+        positionConst.gridx = 1;
+        positionConst.gridy = 4;
+        add(userDepositLabel, positionConst);
+        
+        positionConst.gridx = 2;
+        positionConst.gridy = 4;
+        add(depositField, positionConst);
+        
+        positionConst.gridx = 3;
+        positionConst.gridy = 4;
+        add(depositBtn, positionConst);
+        
+        userWithdrawLabel = new JLabel("Withdraw Amount: ");
+        withdrawField = new JTextField(10);
+        withdrawBtn = new JButton("Withdraw");
+        withdrawBtn.addActionListener(this);
+        
+        positionConst.gridx = 1;
+        positionConst.gridy = 5;
+        add(userWithdrawLabel, positionConst);
+        
+        positionConst.gridx = 2;
+        positionConst.gridy = 5;
+        add(withdrawField, positionConst);
+        
+        positionConst.gridx = 3;
+        positionConst.gridy = 5;
+        add(withdrawBtn, positionConst);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 400);

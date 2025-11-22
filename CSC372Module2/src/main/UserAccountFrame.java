@@ -115,24 +115,23 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         		} else if (e.getSource() == depositBtn) {
         			double amount = Double.parseDouble(depositField.getText());
         			userBalance += amount;
-        			confirmBalanceLabel.setText("Deposit Successful. New Balance: $" + userBalance);
+        			confirmBalanceLabel.setText(String.format("Deposit Successful. New Balance: $%.2f", userBalance));
         			depositField.setText("");
         		} else if (e.getSource() == withdrawBtn) {
         			double amount = Double.parseDouble(withdrawField.getText());
-        			userBalance -= amount;
-        			confirmBalanceLabel.setText("Withdrawal Successful. New Balance: $" + userBalance);
-        			withdrawField.setText("");
+        			if (amount > userBalance) {
+        				JOptionPane.showMessageDialog(this, "Insufficient funds.", "Error", JOptionPane.ERROR_MESSAGE);
+        			} else {
+        				userBalance -= amount;
+        				confirmBalanceLabel.setText("Withdrawal Successful. New Balance: $" + userBalance);
+        				withdrawField.setText("");
+        			}
         		} 
         	} catch (NumberFormatException ex) {
         		JOptionPane.showMessageDialog(this, "Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
-        	}
-        		
-        	
+        	}     	
         }
 	public static void main(String[] args) {
 		new UserAccountFrame();
-		
-	
-	
 	}
 }

@@ -36,21 +36,21 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         	
         setLayout(new GridBagLayout());
         positionConst = new GridBagConstraints();
+        positionConst.insets = new Insets (10, 10, 10, 10);
                	
-        positionConst.gridx = 2;
+        positionConst.gridx = 1;
         positionConst.gridy = 0;
         positionConst.fill = GridBagConstraints.NONE;
-        positionConst.weightx = 0;
-        positionConst.insets = new Insets (10, 10, 10, 10);
+        positionConst.weightx = 0;        
         add(userBalanceLabel, positionConst);
         
-        positionConst.gridx = 2;
+        positionConst.gridx = 1;
         positionConst.gridy = 1;
         positionConst.fill = GridBagConstraints.HORIZONTAL;
         positionConst.weightx = 1.0;
         add(balanceField, positionConst);
         
-        positionConst.gridx = 2;
+        positionConst.gridx = 1;
         positionConst.gridy = 2;
         positionConst.fill = GridBagConstraints.NONE;
         positionConst.weightx = 0;
@@ -59,16 +59,17 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         confirmBalanceLabel = new JLabel("");
         confirmBalanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
-        positionConst.gridx = 2;
-        positionConst.gridy = 3;
+        JPanel confirmPanel = new JPanel(new BorderLayout());
+        confirmPanel.add(confirmBalanceLabel, BorderLayout.CENTER);
+        
+        positionConst.gridx = 0;
+        positionConst.gridy = 1;
+        positionConst.gridwidth = 4;
         positionConst.fill = GridBagConstraints.HORIZONTAL;
-        positionConst.weightx = 1.0;
-        confirmBalanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        add(confirmBalanceLabel, positionConst);
+        positionConst.weightx = 1.0;       
+        add(confirmPanel, positionConst);
         
         positionConst.gridwidth = 1;
-        positionConst.fill = GridBagConstraints.NONE;
-        positionConst.weightx = 0;
         
         userDepositLabel = new JLabel("Deposit Amount: ");
         depositField = new JFormattedTextField(format);
@@ -78,19 +79,19 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         depositBtn.addActionListener(this);
         
         positionConst.gridx = 1;
-        positionConst.gridy = 4;
+        positionConst.gridy = 2;
         positionConst.fill = GridBagConstraints.HORIZONTAL;
-        positionConst.weightx = 1.0;
+        positionConst.weightx = 0;
         add(userDepositLabel, positionConst);
         
         positionConst.gridx = 2;
-        positionConst.gridy = 4;
+        positionConst.gridy = 2;
         positionConst.fill = GridBagConstraints.HORIZONTAL;
         positionConst.weightx = 1.0;
         add(depositField, positionConst);
         
         positionConst.gridx = 3;
-        positionConst.gridy = 4;
+        positionConst.gridy = 2;
         positionConst.fill = GridBagConstraints.NONE;
         positionConst.weightx = 0;
         add(depositBtn, positionConst);
@@ -103,19 +104,19 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         withdrawBtn.addActionListener(this);
         
         positionConst.gridx = 1;
-        positionConst.gridy = 5;
+        positionConst.gridy = 3;
         positionConst.fill = GridBagConstraints.HORIZONTAL;
-        positionConst.weightx = 1.0;
+        positionConst.weightx = 0;
         add(userWithdrawLabel, positionConst);
         
         positionConst.gridx = 2;
-        positionConst.gridy = 5;
+        positionConst.gridy = 3;
         positionConst.fill = GridBagConstraints.HORIZONTAL;
         positionConst.weightx = 1.0;
         add(withdrawField, positionConst);
         
         positionConst.gridx = 3;
-        positionConst.gridy = 5;
+        positionConst.gridy = 3;
         positionConst.fill = GridBagConstraints.NONE;
         positionConst.weightx = 0;
         add(withdrawBtn, positionConst);
@@ -128,9 +129,9 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         withdrawBtn.setVisible(false);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        setMinimumSize(new Dimension(600, 400));
-        setPreferredSize(new Dimension(600, 400));
+
+        setMinimumSize(new Dimension(400, 200));
+        setPreferredSize(new Dimension(400, 200));
         
 		pack();
 		setVisible(true);

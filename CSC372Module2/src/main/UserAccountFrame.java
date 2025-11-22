@@ -43,6 +43,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         positionConst.gridx = 2;
         positionConst.gridy = 1;
+        positionConst.fill = GridBagConstraints.HORIZONTAL;
+        positionConst.weightx = 1.0;
         add(balanceField, positionConst);
         
         positionConst.gridx = 2;
@@ -59,6 +61,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         userDepositLabel = new JLabel("Deposit Amount: ");
         depositField = new JFormattedTextField(NumberFormat.getNumberInstance());
+        depositField.setEditable(true);
+        depositField.setText("");
         depositBtn = new JButton("Deposit");
         depositBtn.addActionListener(this);
         
@@ -68,6 +72,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         positionConst.gridx = 2;
         positionConst.gridy = 4;
+        positionConst.fill = GridBagConstraints.HORIZONTAL;
+        positionConst.weightx = 1.0;
         add(depositField, positionConst);
         
         positionConst.gridx = 3;
@@ -76,6 +82,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         userWithdrawLabel = new JLabel("Withdraw Amount: ");
         withdrawField = new JFormattedTextField(NumberFormat.getNumberInstance());
+        withdrawField.setEditable(true);
+        withdrawField.setText("");
         withdrawBtn = new JButton("Withdraw");
         withdrawBtn.addActionListener(this);
         
@@ -85,6 +93,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         positionConst.gridx = 2;
         positionConst.gridy = 5;
+        positionConst.fill = GridBagConstraints.HORIZONTAL;
+        positionConst.weightx = 1.0;
         add(withdrawField, positionConst);
         
         positionConst.gridx = 3;
@@ -105,12 +115,13 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         		} else if (e.getSource() == depositBtn) {
         			double amount = Double.parseDouble(depositField.getText());
         			userBalance += amount;
-        			confirmBalanceLabel.setText("Balance: $" + userBalance);
+        			confirmBalanceLabel.setText("Deposit Successful. New Balance: $" + userBalance);
         			depositField.setText("");
         		} else if (e.getSource() == withdrawBtn) {
-        			double amount = Double.parseDouble(depositField.getText());
+        			double amount = Double.parseDouble(withdrawField.getText());
         			userBalance -= amount;
-        			confirmBalanceLabel.setText("Balance: $" + userBalance);
+        			confirmBalanceLabel.setText("Withdrawal Successful. New Balance: $" + userBalance);
+        			withdrawField.setText("");
         		} 
         	} catch (NumberFormatException ex) {
         		JOptionPane.showMessageDialog(this, "Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);

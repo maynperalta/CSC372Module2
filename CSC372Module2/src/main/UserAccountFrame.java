@@ -3,15 +3,16 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.NumberFormat;
 
 public class UserAccountFrame extends JFrame implements ActionListener {
     
 	private JLabel userBalanceLabel;
-    private JTextField balanceField;
+    private JFormattedTextField balanceField;
     private JLabel userDepositLabel;
-    private JTextField depositField;
+    private JFormattedTextField depositField;
     private JLabel userWithdrawLabel;
-    private JTextField withdrawField;
+    private JFormattedTextField withdrawField;
     private JButton balanceBtn;
     private JButton depositBtn;
     private JButton withdrawBtn;
@@ -25,7 +26,7 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         setTitle("User Account Information");
         	
         userBalanceLabel = new JLabel("Please Enter Your Balance.");
-        balanceField = new JTextField(15);
+        balanceField = new JFormattedTextField(NumberFormat.getNumberInstance());
         balanceField.setEditable(true);
         balanceField.setText("");
         
@@ -57,7 +58,7 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         add(confirmBalancePanel, positionConst);
         
         userDepositLabel = new JLabel("Deposit Amount: ");
-        depositField = new JTextField(10);
+        depositField = new JFormattedTextField(NumberFormat.getNumberInstance());
         depositBtn = new JButton("Deposit");
         depositBtn.addActionListener(this);
         
@@ -74,7 +75,7 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         add(depositBtn, positionConst);
         
         userWithdrawLabel = new JLabel("Withdraw Amount: ");
-        withdrawField = new JTextField(10);
+        withdrawField = new JFormattedTextField(NumberFormat.getNumberInstance());
         withdrawBtn = new JButton("Withdraw");
         withdrawBtn.addActionListener(this);
         
@@ -97,11 +98,24 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         @Override
         public void actionPerformed(ActionEvent e) {
-        	String userInput = balanceField.getText();
-        	
-        	userBalance = Double.parseDouble(userInput);
-        	
-        	confirmBalanceLabel.setText("Welcome. Your balance is: $" + userBalance);
+        	try {
+        		if (e.getSource() == balanceBtn) {
+        			userBalance = Double.parseDouble(balanceField.getText());
+        			confirmBalanceLabel.setText("Welcome. Your balance is: $" + userBalance);
+        		} else if (e.getSource() == depositBtn) {
+        			double amount = Double.parseDouble(depositField.getText());
+        			userBalance += amount;
+        			confirmBalanceLabel.setText("Balance: $" + userBalance);
+        			depositField.setText("");
+        		} else if (e.getSource() == withdrawBtn) {
+        			double amount = Double.parseDouble(depositField.getText());
+        			userBalance -= amount;
+        			confirmBalanceLabel.setText("Balance: $" + userBalance);
+        		} 
+        	} catch (NumberFormatException ex) {
+        		JOptionPane.showMessageDialog(this, "Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+        	}
+        		
         	
         }
 	public static void main(String[] args) {

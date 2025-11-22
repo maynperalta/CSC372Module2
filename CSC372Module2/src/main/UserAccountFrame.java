@@ -17,7 +17,6 @@ public class UserAccountFrame extends JFrame implements ActionListener {
     private JButton depositBtn;
     private JButton withdrawBtn;
     private double userBalance = 0;
-    private JPanel confirmBalancePanel;
     private JLabel confirmBalanceLabel;
 	
 	UserAccountFrame() {
@@ -37,7 +36,7 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         	
         setLayout(new GridBagLayout());
         positionConst = new GridBagConstraints();
-        	
+               	
         positionConst.gridx = 2;
         positionConst.gridy = 0;
         positionConst.fill = GridBagConstraints.NONE;
@@ -57,15 +56,19 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         positionConst.weightx = 0;
         add(balanceBtn, positionConst);
         
-        confirmBalancePanel = new JPanel();
         confirmBalanceLabel = new JLabel("");
-        confirmBalancePanel.add(confirmBalanceLabel);
+        confirmBalanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
         positionConst.gridx = 2;
         positionConst.gridy = 3;
+        positionConst.fill = GridBagConstraints.HORIZONTAL;
+        positionConst.weightx = 1.0;
+        confirmBalanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(confirmBalanceLabel, positionConst);
+        
+        positionConst.gridwidth = 1;
         positionConst.fill = GridBagConstraints.NONE;
         positionConst.weightx = 0;
-        add(confirmBalancePanel, positionConst);
         
         userDepositLabel = new JLabel("Deposit Amount: ");
         depositField = new JFormattedTextField(format);
@@ -76,8 +79,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         positionConst.gridx = 1;
         positionConst.gridy = 4;
-        positionConst.fill = GridBagConstraints.NONE;
-        positionConst.weightx = 0;
+        positionConst.fill = GridBagConstraints.HORIZONTAL;
+        positionConst.weightx = 1.0;
         add(userDepositLabel, positionConst);
         
         positionConst.gridx = 2;
@@ -101,8 +104,8 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         
         positionConst.gridx = 1;
         positionConst.gridy = 5;
-        positionConst.fill = GridBagConstraints.NONE;
-        positionConst.weightx = 0;
+        positionConst.fill = GridBagConstraints.HORIZONTAL;
+        positionConst.weightx = 1.0;
         add(userWithdrawLabel, positionConst);
         
         positionConst.gridx = 2;
@@ -125,6 +128,10 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         withdrawBtn.setVisible(false);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        setMinimumSize(new Dimension(600, 400));
+        setPreferredSize(new Dimension(600, 400));
+        
 		pack();
 		setVisible(true);
 		
@@ -175,6 +182,9 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         		} 
         	} catch (NumberFormatException ex) {
         		JOptionPane.showMessageDialog(this, "Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+        		balanceField.setText("");
+        		depositField.setText("");
+        		withdrawField.setText("");
         	}     	
         }
 	public static void main(String[] args) {

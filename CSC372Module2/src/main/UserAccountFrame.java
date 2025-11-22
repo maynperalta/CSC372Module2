@@ -24,9 +24,12 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         GridBagConstraints positionConst = null;
         	
         setTitle("User Account Information");
+        
+        NumberFormat format = NumberFormat.getNumberInstance();
+        format.setGroupingUsed(false);
         	
         userBalanceLabel = new JLabel("Please Enter Your Balance.");
-        balanceField = new JFormattedTextField(NumberFormat.getNumberInstance());
+        balanceField = new JFormattedTextField(format);
         balanceField.setEditable(true);
         balanceField.setText("");
         balanceBtn = new JButton("Submit Balance");
@@ -65,7 +68,7 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         add(confirmBalancePanel, positionConst);
         
         userDepositLabel = new JLabel("Deposit Amount: ");
-        depositField = new JFormattedTextField(NumberFormat.getNumberInstance());
+        depositField = new JFormattedTextField(format);
         depositField.setEditable(true);
         depositField.setText("");
         depositBtn = new JButton("Deposit");
@@ -90,7 +93,7 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         add(depositBtn, positionConst);
         
         userWithdrawLabel = new JLabel("Withdraw Amount: ");
-        withdrawField = new JFormattedTextField(NumberFormat.getNumberInstance());
+        withdrawField = new JFormattedTextField(format);
         withdrawField.setEditable(true);
         withdrawField.setText("");
         withdrawBtn = new JButton("Withdraw");
@@ -146,6 +149,10 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         	        userWithdrawLabel.setVisible(true);
         	        withdrawField.setVisible(true);
         	        withdrawBtn.setVisible(true);
+        	        
+        	        userBalanceLabel.setVisible(false);
+        	        balanceField.setVisible(false);
+        	        balanceBtn.setVisible(false);
         	        
         	        this.revalidate();
         	        this.repaint();

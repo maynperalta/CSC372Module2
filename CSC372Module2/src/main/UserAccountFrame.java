@@ -15,6 +15,9 @@ public class UserAccountFrame extends JFrame implements ActionListener {
     private JButton balanceBtn;
     private JButton depositBtn;
     private JButton withdrawBtn;
+    private double userBalance = 0;
+    private JPanel confirmBalancePanel;
+    private JLabel confirmBalanceLabel;
 	
 	UserAccountFrame() {
         GridBagConstraints positionConst = null;
@@ -24,7 +27,7 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         userBalanceLabel = new JLabel("Please Enter Your Balance.");
         balanceField = new JTextField(15);
         balanceField.setEditable(true);
-        balanceField.setText("balance");
+        balanceField.setText("");
         
         balanceBtn = new JButton("Submit Balance");
         balanceBtn.addActionListener(this);
@@ -45,19 +48,28 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         positionConst.gridy = 2;
         add(balanceBtn, positionConst);
         
+        confirmBalancePanel = new JPanel();
+        confirmBalanceLabel = new JLabel("");
+        confirmBalancePanel.add(confirmBalanceLabel);
+        
+        positionConst.gridx = 2;
+        positionConst.gridy = 3;
+        add(confirmBalancePanel, positionConst);
+        
+        
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 400);
 		setVisible(true);
         }
         
         @Override
-        public void actionPerformed(ActionEvent event) {
-        	String userInput;
-        	int userBalance;
+        public void actionPerformed(ActionEvent e) {
+        	String userInput = balanceField.getText();
         	
-        	userInput = balanceField.getText();
-        	userBalance = Integer.parseInt(userInput);
+        	userBalance = Double.parseDouble(userInput);
         	
+        	confirmBalanceLabel.setText("Welcome. Your balance is: $" + userBalance);
         	
         }
 	public static void main(String[] args) {
